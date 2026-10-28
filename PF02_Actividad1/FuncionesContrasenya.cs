@@ -4,7 +4,15 @@ using System.Text;
 
 namespace PF02_Actividad1
 {
-    internal class FuncionesContrasenya
+    public class FuncionesContrasenya
     {
+
+        public bool EsContrasenyaValida(string contrasenya)
+        {
+            // Devuelve true si cumple todas las condiciones
+            return !string.IsNullOrEmpty(contrasenya)
+            && contrasenya.Length >= 8
+            && contrasenya.Contains("#");
+        }
     }
 }
