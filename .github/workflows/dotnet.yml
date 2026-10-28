@@ -1,0 +1,34 @@
+
+name: Pruebas unitarias C#
+
+on:
+  push:
+    branches:
+      - develop
+      - feature-test
+      - feature-code
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restaurar dependencias
+        run: dotnet restore PF02_Actividad1.slnx
+
+      - name: Compilar la solución
+        run: dotnet build PF02_Actividad1.slnx --configuration Release --no-restore
+
+      - name: Ejecutar pruebas
+        run: dotnet test PF02_Actividad1.slnx --configuration Release --no-build --verbosity normal
